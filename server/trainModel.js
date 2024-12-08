@@ -14,7 +14,7 @@ model.compile({
   loss: "meanSquaredError",
 });
 
-async function trainModel() {
+export async function trainModel() {
   console.log("Training model...");
   await model.fit(trainX, trainY, {
     epochs: 100,
@@ -23,14 +23,8 @@ async function trainModel() {
   console.log("Training completed!");
 }
 
-async function predictNumbers(inputNumber) {
+export async function predictNumbers(inputNumber) {
   const inputTensor = tf.tensor([inputNumber]);
   const prediction = model.predict(inputTensor);
   return Array.from(prediction.dataSync()).map((num) => Math.round(num));
 }
-
-(async () => {
-  await trainModel();
-  const predictedNumbers = await predictNumbers([8, 15, 19, 21, 32, 36, 38]);
-  console.log("Predicted numbers:", predictedNumbers);
-})();
