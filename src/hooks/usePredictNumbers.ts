@@ -10,9 +10,9 @@ const fetchPredictedNumbers = async () => {
   return data;
 };
 
-export const usePredictNumbers = () => {
+export const usePredictNumbers = (trigger: number) => {
   return useQuery({
-    queryKey: ["predict"],
+    queryKey: ["predict", trigger],
     queryFn: fetchPredictedNumbers,
   });
 };

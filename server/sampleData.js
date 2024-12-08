@@ -14,4 +14,4 @@ export const SampleLottoYData = [
 ];
 
 export const X = SampleLottoXData.slice(0, -1);
-export const Y = SampleLottoYData.slice(1);
+export const Y = SampleLottoYData.slice(0);

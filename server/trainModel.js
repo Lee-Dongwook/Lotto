@@ -1,4 +1,4 @@
-import { X, Y } from "./sampleData";
+import { X, Y } from "./sampleData.js";
 import * as tf from "@tensorflow/tfjs";
 
 const trainX = tf.tensor(X);
@@ -23,8 +23,38 @@ export async function trainModel() {
   console.log("Training completed!");
 }
 
-export async function predictNumbers(inputNumber) {
-  const inputTensor = tf.tensor([inputNumber]);
+function generateRandomInput() {
+  const numbers = new Set();
+  while (numbers.size < 6) {
+    const randomNum = Math.floor(Math.random() * 45) + 1;
+    numbers.add(randomNum);
+  }
+
+  const mainNumbers = Array.from(numbers);
+
+  let bonusNumber;
+
+  do {
+    bonusNumber = Math.floor(Math.random() * 45) + 1;
+  } while (numbers.has(bonusNumber));
+
+  return [...mainNumbers, bonusNumber];
+}
+
+export async function predictNumbers(inputNumber = null) {
+  const randomInput = generateRandomInput();
+  const inputTensor = tf.tensor([inputNumber || randomInput]);
   const prediction = model.predict(inputTensor);
-  return Array.from(prediction.dataSync()).map((num) => Math.round(num));
+  const result = Array.from(prediction.dataSync()).map((num) => {
+    const roundedNum = Math.round(num);
+    return Math.min(Math.max(roundedNum, 1), 45);
+  });
+
+  const uniqueResult = Array.from(new Set(result));
+
+  while (uniqueResult.length < 7) {
+    uniqueResult.push(Math.floor(Math.random() * 45) + 1);
+  }
+
+  return uniqueResult.slice(0, 7);
 }

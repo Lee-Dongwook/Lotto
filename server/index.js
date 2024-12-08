@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { trainModel, predictNumbers } from "./trainModel.js";
 
 const app = express();
 const PORT = 8080;
@@ -17,8 +18,7 @@ app.get("/api/predict", async (req, res) => {
     await trainModel();
     console.log("Model Training Successful!");
 
-    const inputNumbers = [8, 15, 19, 21, 32, 36, 38];
-    const predictedNumbers = await predictNumbers(inputNumbers);
+    const predictedNumbers = await predictNumbers();
 
     res.json({ predictedNumbers });
   } catch (error) {
