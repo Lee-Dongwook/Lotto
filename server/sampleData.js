@@ -1,7 +1,17 @@
-export const SampleLottoData = [
+export const SampleLottoXData = [
   [8, 15, 19, 21, 32, 36, 38], // 1149회
   [3, 6, 13, 15, 16, 22, 32], // 1148회
   [7, 11, 24, 26, 27, 37, 32], // 1147회
   [6, 11, 17, 19, 40, 43, 28], // 1146회
   [2, 11, 31, 33, 37, 44, 32], // 1145회
 ];
+
+export const SampleLottoYData = [
+  [3, 6, 13, 15, 16, 22, 32], // 1148회
+  [7, 11, 24, 26, 27, 37, 32], // 1147회
+  [6, 11, 17, 19, 40, 43, 28], // 1146회
+  [2, 11, 31, 33, 37, 44, 32], // 1145회
+];
+
+export const X = SampleLottoXData.slice(0, -1);
+export const Y = SampleLottoYData.slice(1);
